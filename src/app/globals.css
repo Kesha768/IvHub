@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+:root {
+  --color1: #00539F;
+  --color2: #004C97;
+  --color3: #003A73;
+  --color4: #002D58;
+  --color5: #E6F0FA;
+  --color6: #9CA3AF;
+  --color7: #E5E7EB;
+  --color8: #111827;
+  --color9: #6B7280;
+  --color10: #9CA3AF;
+  --color11: #00539F;
+  --color12: #003A73;
+  --color13: #00539F59;
+  --color14: #1B875A;
+  --color15: #B45309;
+  --color16: #B91C1C;
+  --color17: #2563EB;
+  --white: #fff;
+  --black: #000;
+}
+
+body {
+  width: 100vw;
+  min-height: 100vh;
+  background: #F3F3F3;
+  display: flex;
+  flex-direction: column;
+  font-family: Inter, Montserrat, Unbounded;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  padding: 13px 30px 42px;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.option.active {
+  background-color: #003A73;
+  color: #FFFBFB;
+}
