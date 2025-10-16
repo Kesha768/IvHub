@@ -29,13 +29,14 @@ body {
   display: flex;
   flex-direction: column;
   font-family: Inter, Montserrat, Unbounded;
+  overflow-x: hidden;
 }
 
 .container {
   display: flex;
   flex-direction: column;
   row-gap: 12px;
-  padding: 13px 30px 42px;
+  padding: 13px 10px 42px;
 }
 
 .no-scrollbar::-webkit-scrollbar {

@@ -13,6 +13,8 @@ interface Option {
   label: string;
 }
 
+const API_URL = "http://localhost:4000";
+
 const RegInputs: React.FC<RegPageProps> = ({ institute, but, role }) => {
   const [options, setOptions] = useState<Option[]>([]);
   const [selected, setSelected] = useState<Option | null>(null);
@@ -44,7 +46,7 @@ const RegInputs: React.FC<RegPageProps> = ({ institute, but, role }) => {
       } else {
         setSelectedSubgroup(null);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const loadGroupByOption = async (option: Option) => {
@@ -67,7 +69,7 @@ const RegInputs: React.FC<RegPageProps> = ({ institute, but, role }) => {
         setSubgroups([]);
         setSelectedSubgroup(null);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 
   useEffect(() => {
@@ -88,7 +90,7 @@ const RegInputs: React.FC<RegPageProps> = ({ institute, but, role }) => {
           setSelected(firstOption);
           await loadGroupByOption(firstOption);
         }
-      } catch (error) {}
+      } catch (error) { }
     }
     fetchOptions();
   }, [institute]);
@@ -136,26 +138,34 @@ const RegInputs: React.FC<RegPageProps> = ({ institute, but, role }) => {
   }, []);
 
   const handleSubmit = async () => {
-    const dataToSend = {
+    const payload = {
+      name: "Новый пользователь",
       direction: selected ? selected.value : null,
       group: selectedGroup ? selectedGroup.value : null,
       subgroup: selectedSubgroup ? selectedSubgroup.value : null,
-      role: role ? role.value : null,
+      role: role ? role.value : "1",
+      avatarUrl: "/main-logo.png"
     };
     try {
-      await fetch('/эндпоинт', {
+      const res = await fetch(`${API_URL}/users`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(dataToSend),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
       });
-    } catch (error) {}
+      if (res.ok) {
+        // опционально: можно сохранить id в localStorage
+        const created = await res.json();
+        if (created?.id) {
+          localStorage.setItem('currentUserId', String(created.id));
+        }
+        window.location.href = '/dashboard/profile';
+      }
+    } catch (error) { }
   };
 
   return (
     <div className="flex flex-col w-full mt-[17.75px] gap-[20.32px]">
-      
+
       <div className="w-full gap-[7.32px]">
         <span className="font-[Montserrat] font-medium text-[13px] text-[#111827]">Выберите свое направление</span>
         <div className="relative w-full" ref={containerRef}>

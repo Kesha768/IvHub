@@ -31,9 +31,11 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body
-        className={`${inter.variable} ${unbounded.variable} ${montserrat.variable} antialiased`}
+        className={`${inter.variable} ${unbounded.variable} ${montserrat.variable} antialiased overflow-x-hidden`}
       >
-        {children}
+        <div className="px-2.5 sm:px-6 md:px-8  mx-auto w-full">
+          {children}
+        </div>
       </body>
     </html>
   );
